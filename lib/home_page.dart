@@ -3,11 +3,13 @@ import 'add_income.dart';
 import 'add_expense.dart';
 
 class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Spendwise'),
+        title: const Text('Spendwise'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -25,31 +27,31 @@ class HomePage extends StatelessWidget {
             MaterialPageRoute(builder: (context) => AddExpensePage()),
           );
         },
-        backgroundColor: Color(0xFFFF8D6C),
-        child: Icon(Icons.add),
+        backgroundColor: const Color(0xFFFF8D6C),
+        child: const Icon(Icons.add),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
-        shape: CircularNotchedRectangle(),
+        shape: const CircularNotchedRectangle(),
         notchMargin: 6.0,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             IconButton(
-              icon: Icon(Icons.home),
+              icon: const Icon(Icons.home),
               onPressed: () {},
             ),
             IconButton(
-              icon: Icon(Icons.insert_chart),
+              icon: const Icon(Icons.insert_chart),
               onPressed: () {},
             ),
-            SizedBox(width: 40), // The dummy child
+            const SizedBox(width: 40),
             IconButton(
-              icon: Icon(Icons.folder),
+              icon: const Icon(Icons.folder),
               onPressed: () {},
             ),
             IconButton(
-              icon: Icon(Icons.person),
+              icon: const Icon(Icons.person),
               onPressed: () {},
             ),
           ],
@@ -61,7 +63,7 @@ class HomePage extends StatelessWidget {
   Widget _buildBalanceCard(BuildContext context) {
     return Card(
       child: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [Color(0xFF00B2E7), Color(0xFFFF8D6C)],
             begin: Alignment.topLeft,
@@ -71,8 +73,13 @@ class HomePage extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            Text('Total Balance', style: TextStyle(fontSize: 18, color: Colors.white)),
-            Text('\$3800', style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold, color: Colors.white)),
+            const Text('Total Balance',
+                style: TextStyle(fontSize: 18, color: Colors.white)),
+            const Text('\$3800',
+                style: TextStyle(
+                    fontSize: 36,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white)),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -83,11 +90,15 @@ class HomePage extends StatelessWidget {
                       MaterialPageRoute(builder: (context) => AddIncomePage()),
                     );
                   },
-                  child: Column(
+                  child: const Column(
                     children: [
-                      Icon(Icons.arrow_upward, color: Color(0xFFFF8D6C), size: 32),
-                      Text('Income', style: TextStyle(fontSize: 16, color: Colors.white)),
-                      Text('\$5000', style: TextStyle(fontSize: 20, color: Color(0xFFFF8D6C))),
+                      Icon(Icons.arrow_upward,
+                          color: Color(0xFFFF8D6C), size: 32),
+                      Text('Income',
+                          style: TextStyle(fontSize: 16, color: Colors.white)),
+                      Text('\$5000',
+                          style: TextStyle(
+                              fontSize: 20, color: Color(0xFFFF8D6C))),
                     ],
                   ),
                 ),
@@ -98,11 +109,15 @@ class HomePage extends StatelessWidget {
                       MaterialPageRoute(builder: (context) => AddExpensePage()),
                     );
                   },
-                  child: Column(
+                  child: const Column(
                     children: [
-                      Icon(Icons.arrow_downward, color: Color(0xFFFF8D6C), size: 32),
-                      Text('Expenses', style: TextStyle(fontSize: 16, color: Colors.white)),
-                      Text('\$1200', style: TextStyle(fontSize: 20, color: Color(0xFFFF8D6C))),
+                      Icon(Icons.arrow_downward,
+                          color: Color(0xFFFF8D6C), size: 32),
+                      Text('Expenses',
+                          style: TextStyle(fontSize: 16, color: Colors.white)),
+                      Text('\$1200',
+                          style: TextStyle(
+                              fontSize: 20, color: Color(0xFFFF8D6C))),
                     ],
                   ),
                 ),
@@ -117,7 +132,7 @@ class HomePage extends StatelessWidget {
   Widget _buildRecentTransactions() {
     return Expanded(
       child: ListView(
-        children: [
+        children: const [
           ListTile(
             leading: Icon(Icons.shopping_bag, color: Colors.orange),
             title: Text('Shopping'),

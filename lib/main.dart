@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'signup.dart';
 import 'login.dart';
 import 'reset_password.dart';
@@ -6,24 +7,34 @@ import 'launch_screen.dart';
 import 'home_page.dart'; // Import the HomePage class
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Auth UI',
+      debugShowCheckedModeBanner: false,
+      title: 'SpendWise App',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+          fontFamily: GoogleFonts.inter().fontFamily,
+          primarySwatch: Colors.blue,
+          colorScheme: ColorScheme.light(
+            surface: Colors.grey.shade100,
+            onSurface: Colors.black,
+            primary: const Color(0xFF00B2E7),
+            secondary: const Color(0xFFFF8D6C),
+            tertiary: const Color(0xFFE064F7),
+            outline: Colors.grey,
+          )),
       home: LaunchScreen(),
       routes: {
-        '/login': (context) => LoginPage(),
-        '/signup': (context) => SignUpPage(),
+        '/login': (context) => const LoginPage(),
+        '/signup': (context) => const SignUpPage(),
         '/reset_password': (context) => ResetPasswordPage(),
-        '/home': (context) => HomePage(), // Add this route
+        '/home': (context) => const HomePage(), // Add this route
       },
     );
   }

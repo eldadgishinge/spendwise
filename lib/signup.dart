@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class SignUpPage extends StatelessWidget {
+  const SignUpPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +38,7 @@ class SignUpPage extends StatelessWidget {
                 minimumSize: const Size(double.infinity, 50),
                 backgroundColor: const Color(0xFF00B2E7),
               ),
-              child: const Text('Sign Up'),
+              child: const Text('Sign Up', style: TextStyle(color: Colors.white)),
             ),
             const SizedBox(height: 20),
             const Text('Or continue with'),
