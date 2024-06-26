@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'home_page.dart'; // Ensure HomePage is imported
 
 class LoginPage extends StatelessWidget {
   @override
@@ -19,7 +20,11 @@ class LoginPage extends StatelessWidget {
             _buildTextField('Password', isPassword: true),
             SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                // Replace with your actual login logic (e.g., validate credentials, call a login API)
+                // Assuming successful login...
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()));
+              },
               child: Text('Login'),
               style: ElevatedButton.styleFrom(
                 minimumSize: Size(double.infinity, 50),
@@ -28,9 +33,7 @@ class LoginPage extends StatelessWidget {
             ),
             SizedBox(height: 20),
             GestureDetector(
-              onTap: () {
-                Navigator.pushNamed(context, '/reset_password');
-              },
+              onTap: () => Navigator.pushNamed(context, '/reset_password'),
               child: Text(
                 'Forgot Password?',
                 style: TextStyle(color: Colors.blue),
@@ -38,9 +41,7 @@ class LoginPage extends StatelessWidget {
             ),
             SizedBox(height: 20),
             GestureDetector(
-              onTap: () {
-                Navigator.pushNamed(context, '/signup');
-              },
+              onTap: () => Navigator.pushNamed(context, '/signup'),
               child: Text(
                 'Don\'t have an account yet? Sign Up',
                 style: TextStyle(color: Colors.blue),
