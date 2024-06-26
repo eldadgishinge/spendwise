@@ -7,10 +7,10 @@ class LoginPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text('Login'),
+        title: const Text('Login'),
         backgroundColor: Colors.white,
         elevation: 0,
-        iconTheme: IconThemeData(color: Colors.black),
+        iconTheme: const IconThemeData(color: Colors.black),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -18,31 +18,32 @@ class LoginPage extends StatelessWidget {
           children: <Widget>[
             _buildTextField('Email'),
             _buildTextField('Password', isPassword: true),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
                 // Replace with your actual login logic (e.g., validate credentials, call a login API)
                 // Assuming successful login...
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()));
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) => HomePage()));
               },
-              child: Text('Login'),
               style: ElevatedButton.styleFrom(
-                minimumSize: Size(double.infinity, 50),
-                backgroundColor: Color(0xFF00B2E7),
+                minimumSize: const Size(double.infinity, 50),
+                backgroundColor: const Color(0xFF00B2E7),
               ),
+              child: const Text('Login'),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             GestureDetector(
               onTap: () => Navigator.pushNamed(context, '/reset_password'),
-              child: Text(
+              child: const Text(
                 'Forgot Password?',
                 style: TextStyle(color: Colors.blue),
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             GestureDetector(
               onTap: () => Navigator.pushNamed(context, '/signup'),
-              child: Text(
+              child: const Text(
                 'Don\'t have an account yet? Sign Up',
                 style: TextStyle(color: Colors.blue),
               ),
@@ -65,7 +66,7 @@ class LoginPage extends StatelessWidget {
           ),
           filled: true,
           fillColor: Colors.grey[200],
-          suffixIcon: isPassword ? Icon(Icons.visibility) : null,
+          suffixIcon: isPassword ? const Icon(Icons.visibility) : null,
         ),
         obscureText: isPassword,
       ),

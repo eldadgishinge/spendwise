@@ -6,10 +6,10 @@ class SignUpPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text('Sign Up'),
+        title: const Text('Sign Up'),
         backgroundColor: Colors.white,
         elevation: 0,
-        iconTheme: IconThemeData(color: Colors.black),
+        iconTheme: const IconThemeData(color: Colors.black),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -18,45 +18,45 @@ class SignUpPage extends StatelessWidget {
             _buildTextField('Name'),
             _buildTextField('Email'),
             _buildTextField('Password', isPassword: true),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Row(
               children: [
                 Checkbox(value: false, onChanged: (bool? value) {}),
-                Text('By signing up, you agree to the '),
-                Text(
+                const Text('By signing up, you agree to the '),
+                const Text(
                   'Terms of Service and Privacy Policy',
                   style: TextStyle(color: Colors.blue),
                 ),
               ],
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {},
-              child: Text('Sign Up'),
               style: ElevatedButton.styleFrom(
-                minimumSize: Size(double.infinity, 50),
-                backgroundColor: Color(0xFF00B2E7),
+                minimumSize: const Size(double.infinity, 50),
+                backgroundColor: const Color(0xFF00B2E7),
               ),
+              child: const Text('Sign Up'),
             ),
-            SizedBox(height: 20),
-            Text('Or continue with'),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
+            const Text('Or continue with'),
+            const SizedBox(height: 20),
             ElevatedButton.icon(
               onPressed: () {},
-              icon: Icon(Icons.login),
-              label: Text('Sign Up with Google'),
+              icon: const Icon(Icons.login),
+              label: const Text('Sign Up with Google'),
               style: ElevatedButton.styleFrom(
-                minimumSize: Size(double.infinity, 50),
+                minimumSize: const Size(double.infinity, 50),
                 backgroundColor: Colors.white,
                 foregroundColor: Colors.black,
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             GestureDetector(
               onTap: () {
                 Navigator.pushNamed(context, '/login');
               },
-              child: Text(
+              child: const Text(
                 'Already have an account? Login',
                 style: TextStyle(color: Colors.blue),
               ),
@@ -79,7 +79,7 @@ class SignUpPage extends StatelessWidget {
           ),
           filled: true,
           fillColor: Colors.grey[200],
-          suffixIcon: isPassword ? Icon(Icons.visibility) : null,
+          suffixIcon: isPassword ? const Icon(Icons.visibility) : null,
         ),
         obscureText: isPassword,
       ),

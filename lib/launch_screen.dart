@@ -10,7 +10,7 @@ class _LaunchScreenState extends State<LaunchScreen> {
   @override
   void initState() {
     super.initState();
-    Timer(Duration(seconds: 4), () {
+    Timer(const Duration(seconds: 4), () {
       Navigator.pushReplacementNamed(context, '/signup');
     });
   }
@@ -19,7 +19,7 @@ class _LaunchScreenState extends State<LaunchScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [Color(0xFF00B2E7), Color(0xFFE8743B)],
             begin: Alignment.topLeft,
@@ -34,8 +34,8 @@ class _LaunchScreenState extends State<LaunchScreen> {
                 'assets/launch_image.png', // Ensure you have this image in your assets
                 height: 200,
               ),
-              SizedBox(height: 20),
-              Text(
+              const SizedBox(height: 20),
+              const Text(
                 'SpendWise',
                 style: TextStyle(
                   fontSize: 32,
