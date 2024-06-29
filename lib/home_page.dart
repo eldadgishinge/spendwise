@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'add_income.dart';
 import 'add_expense.dart';
+import 'resources_page.dart';
+import 'profile_page.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -46,11 +48,21 @@ class HomePage extends StatelessWidget {
             SizedBox(width: 40), // The dummy child
             IconButton(
               icon: Icon(Icons.folder),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ResourcesPage()),
+                );
+              },
             ),
             IconButton(
               icon: Icon(Icons.person),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ProfilePage()),
+                );
+              },
             ),
           ],
         ),
@@ -60,6 +72,10 @@ class HomePage extends StatelessWidget {
 
   Widget _buildBalanceCard(BuildContext context) {
     return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+      elevation: 4,
       child: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -67,12 +83,18 @@ class HomePage extends StatelessWidget {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
+          borderRadius: BorderRadius.circular(10),
         ),
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            Text('Total Balance', style: TextStyle(fontSize: 18, color: Colors.white)),
-            Text('\$3800', style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold, color: Colors.white)),
+            Text('Total Balance',
+                style: TextStyle(fontSize: 18, color: Colors.white)),
+            Text('\$3800',
+                style: TextStyle(
+                    fontSize: 36,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white)),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -85,9 +107,13 @@ class HomePage extends StatelessWidget {
                   },
                   child: Column(
                     children: [
-                      Icon(Icons.arrow_upward, color: Color(0xFFFF8D6C), size: 32),
-                      Text('Income', style: TextStyle(fontSize: 16, color: Colors.white)),
-                      Text('\$5000', style: TextStyle(fontSize: 20, color: Color(0xFFFF8D6C))),
+                      Icon(Icons.arrow_upward,
+                          color: Color(0xFFFF8D6C), size: 32),
+                      Text('Income',
+                          style: TextStyle(fontSize: 16, color: Colors.white)),
+                      Text('\$5000',
+                          style: TextStyle(
+                              fontSize: 20, color: Color(0xFFFF8D6C))),
                     ],
                   ),
                 ),
@@ -100,9 +126,13 @@ class HomePage extends StatelessWidget {
                   },
                   child: Column(
                     children: [
-                      Icon(Icons.arrow_downward, color: Color(0xFFFF8D6C), size: 32),
-                      Text('Expenses', style: TextStyle(fontSize: 16, color: Colors.white)),
-                      Text('\$1200', style: TextStyle(fontSize: 20, color: Color(0xFFFF8D6C))),
+                      Icon(Icons.arrow_downward,
+                          color: Color(0xFFFF8D6C), size: 32),
+                      Text('Expenses',
+                          style: TextStyle(fontSize: 16, color: Colors.white)),
+                      Text('\$1200',
+                          style: TextStyle(
+                              fontSize: 20, color: Color(0xFFFF8D6C))),
                     ],
                   ),
                 ),
