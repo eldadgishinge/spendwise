@@ -5,29 +5,30 @@ class AddExpensePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xFFFF8D6C),
-        title: Text('Add Expense'),
+        backgroundColor: const Color(0xFFFF8D6C),
+        title: const Text('Add Expense'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            Text('How much was spent?', style: TextStyle(fontSize: 18)),
-            Text('\$0', style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold)),
-            SizedBox(height: 20),
+            const Text('How much was spent?', style: TextStyle(fontSize: 18)),
+            const Text('\$0',
+                style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold)),
+            const SizedBox(height: 20),
             _buildTextField('Category'),
             _buildTextField('Description'),
             _buildTextField('Wallet'),
             _buildAttachmentButton(),
             _buildRepeatSwitch(),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {},
-              child: Text('Continue'),
               style: ElevatedButton.styleFrom(
-                minimumSize: Size(double.infinity, 50),
-                backgroundColor: Color(0xFFFF8D6C),
+                minimumSize: const Size(double.infinity, 50),
+                backgroundColor: const Color(0xFFFF8D6C),
               ),
+              child: const Text('Continue'),
             ),
           ],
         ),
@@ -56,10 +57,10 @@ class AddExpensePage extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: ElevatedButton.icon(
         onPressed: () {},
-        icon: Icon(Icons.attachment),
-        label: Text('Add attachment'),
+        icon: const Icon(Icons.attachment),
+        label: const Text('Add attachment'),
         style: ElevatedButton.styleFrom(
-          minimumSize: Size(double.infinity, 50),
+          minimumSize: const Size(double.infinity, 50),
           backgroundColor: Colors.grey[200],
           foregroundColor: Colors.black,
         ),
@@ -69,7 +70,7 @@ class AddExpensePage extends StatelessWidget {
 
   Widget _buildRepeatSwitch() {
     return SwitchListTile(
-      title: Text('Repeat transaction'),
+      title: const Text('Repeat transaction'),
       value: false,
       onChanged: (bool value) {},
     );

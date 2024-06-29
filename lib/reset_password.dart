@@ -6,10 +6,10 @@ class ResetPasswordPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text('Reset Password'),
+        title: const Text('Reset Password'),
         backgroundColor: Colors.white,
         elevation: 0,
-        iconTheme: IconThemeData(color: Colors.black),
+        iconTheme: const IconThemeData(color: Colors.black),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -17,14 +17,14 @@ class ResetPasswordPage extends StatelessWidget {
           children: <Widget>[
             _buildTextField('New Password', isPassword: true),
             _buildTextField('Confirm new password', isPassword: true),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {},
-              child: Text('Continue'),
               style: ElevatedButton.styleFrom(
-                minimumSize: Size(double.infinity, 50),
-                backgroundColor: Color(0xFF00B2E7),
+                minimumSize: const Size(double.infinity, 50),
+                backgroundColor: const Color(0xFF00B2E7),
               ),
+              child: const Text('Continue'),
             ),
           ],
         ),
@@ -44,7 +44,7 @@ class ResetPasswordPage extends StatelessWidget {
           ),
           filled: true,
           fillColor: Colors.grey[200],
-          suffixIcon: isPassword ? Icon(Icons.visibility) : null,
+          suffixIcon: isPassword ? const Icon(Icons.visibility) : null,
         ),
         obscureText: isPassword,
       ),

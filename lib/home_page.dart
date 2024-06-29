@@ -5,11 +5,13 @@ import 'resources_page.dart';
 import 'profile_page.dart';
 
 class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Spendwise'),
+        title: const Text('Spendwise'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -27,26 +29,27 @@ class HomePage extends StatelessWidget {
             MaterialPageRoute(builder: (context) => AddExpensePage()),
           );
         },
-        backgroundColor: Color(0xFFFF8D6C),
-        child: Icon(Icons.add),
+        backgroundColor: const Color(0xFFFF8D6C),
+        child: const Icon(Icons.add),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
-        shape: CircularNotchedRectangle(),
+        shape: const CircularNotchedRectangle(),
         notchMargin: 6.0,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             IconButton(
-              icon: Icon(Icons.home),
+              icon: const Icon(Icons.home),
               onPressed: () {},
             ),
             IconButton(
-              icon: Icon(Icons.insert_chart),
+              icon: const Icon(Icons.insert_chart),
               onPressed: () {},
             ),
-            SizedBox(width: 40), // The dummy child
+            const SizedBox(width: 40),
             IconButton(
+<<<<<<< HEAD
               icon: Icon(Icons.folder),
               onPressed: () {
                 Navigator.push(
@@ -63,6 +66,14 @@ class HomePage extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => ProfilePage()),
                 );
               },
+=======
+              icon: const Icon(Icons.folder),
+              onPressed: () {},
+            ),
+            IconButton(
+              icon: const Icon(Icons.person),
+              onPressed: () {},
+>>>>>>> 381017899abc09111adbb51a4e5e326f8984bf07
             ),
           ],
         ),
@@ -77,7 +88,7 @@ class HomePage extends StatelessWidget {
       ),
       elevation: 4,
       child: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [Color(0xFF00B2E7), Color(0xFFFF8D6C)],
             begin: Alignment.topLeft,
@@ -88,9 +99,15 @@ class HomePage extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
+<<<<<<< HEAD
             Text('Total Balance',
                 style: TextStyle(fontSize: 18, color: Colors.white)),
             Text('\$3800',
+=======
+            const Text('Total Balance',
+                style: TextStyle(fontSize: 18, color: Colors.white)),
+            const Text('\$3800',
+>>>>>>> 381017899abc09111adbb51a4e5e326f8984bf07
                 style: TextStyle(
                     fontSize: 36,
                     fontWeight: FontWeight.bold,
@@ -105,7 +122,7 @@ class HomePage extends StatelessWidget {
                       MaterialPageRoute(builder: (context) => AddIncomePage()),
                     );
                   },
-                  child: Column(
+                  child: const Column(
                     children: [
                       Icon(Icons.arrow_upward,
                           color: Color(0xFFFF8D6C), size: 32),
@@ -124,7 +141,7 @@ class HomePage extends StatelessWidget {
                       MaterialPageRoute(builder: (context) => AddExpensePage()),
                     );
                   },
-                  child: Column(
+                  child: const Column(
                     children: [
                       Icon(Icons.arrow_downward,
                           color: Color(0xFFFF8D6C), size: 32),
@@ -147,7 +164,7 @@ class HomePage extends StatelessWidget {
   Widget _buildRecentTransactions() {
     return Expanded(
       child: ListView(
-        children: [
+        children: const [
           ListTile(
             leading: Icon(Icons.shopping_bag, color: Colors.orange),
             title: Text('Shopping'),
