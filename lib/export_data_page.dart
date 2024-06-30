@@ -41,11 +41,12 @@ class ExportDataPage extends StatelessWidget {
                   },
                   child: Text('Download'),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Theme.of(context).primaryColor,
+                    backgroundColor: Theme.of(context).secondaryHeaderColor,
                     minimumSize: Size(100, 50),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
                     ),
+                    textStyle: TextStyle(color: Colors.white), // Text color
                   ),
                 ),
               ],

@@ -24,7 +24,7 @@ class ResetPasswordPage extends StatelessWidget {
                 minimumSize: const Size(double.infinity, 50),
                 backgroundColor: const Color(0xFF00B2E7),
               ),
-              child: const Text('Continue'),
+              child: const Text('Reset', style: TextStyle(color: Colors.white)),
             ),
           ],
         ),

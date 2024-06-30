@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import 'home_page.dart'; // Ensure HomePage is imported
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+  const LoginPage({Key? key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text('Login'),
+        title: const Text('Login',
+            style: TextStyle(color: Colors.white)), // Text color set to white
         backgroundColor: Colors.white,
         elevation: 0,
         iconTheme: const IconThemeData(color: Colors.black),
@@ -29,9 +31,10 @@ class LoginPage extends StatelessWidget {
               },
               style: ElevatedButton.styleFrom(
                 minimumSize: const Size(double.infinity, 50),
-                backgroundColor: const Color(0xFF00B2E7),
+                backgroundColor: Color.fromARGB(255, 0, 177, 231),
               ),
-              child: const Text('Login'),
+              child:
+                  const Text('Sign in', style: TextStyle(color: Colors.white)),
             ),
             const SizedBox(height: 20),
             GestureDetector(

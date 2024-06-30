@@ -41,7 +41,7 @@ class LogoutConfirmationPage extends StatelessWidget {
                   },
                   child: Text('Yes'),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.red,
+                    backgroundColor: Color(0xFFFF8D6C),
                     minimumSize: Size(100, 50),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
