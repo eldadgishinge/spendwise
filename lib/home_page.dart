@@ -3,15 +3,16 @@ import 'add_income.dart';
 import 'add_expense.dart';
 import 'resources_page.dart';
 import 'profile_page.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart'
+    show timeDilation; // For controlling animation speed
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Spendwise'),
+        title: Text('Spendwise'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -29,27 +30,28 @@ class HomePage extends StatelessWidget {
             MaterialPageRoute(builder: (context) => AddExpensePage()),
           );
         },
-        backgroundColor: const Color(0xFFFF8D6C),
-        child: const Icon(Icons.add),
+        backgroundColor: Color(0xFFFF8D6C),
+        child: Icon(Icons.add),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
-        shape: const CircularNotchedRectangle(),
+        shape: CircularNotchedRectangle(),
         notchMargin: 6.0,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             IconButton(
-              icon: const Icon(Icons.home),
-              onPressed: () {},
+              icon: Icon(Icons.home),
+              onPressed: () {
+                Navigator.pushReplacementNamed(context, '/home');
+              },
             ),
             IconButton(
-              icon: const Icon(Icons.insert_chart),
+              icon: Icon(Icons.insert_chart),
               onPressed: () {},
             ),
-            const SizedBox(width: 40),
+            SizedBox(width: 40), // The dummy child
             IconButton(
-<<<<<<< HEAD
               icon: Icon(Icons.folder),
               onPressed: () {
                 Navigator.push(
@@ -66,14 +68,6 @@ class HomePage extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => ProfilePage()),
                 );
               },
-=======
-              icon: const Icon(Icons.folder),
-              onPressed: () {},
-            ),
-            IconButton(
-              icon: const Icon(Icons.person),
-              onPressed: () {},
->>>>>>> 381017899abc09111adbb51a4e5e326f8984bf07
             ),
           ],
         ),
@@ -88,7 +82,7 @@ class HomePage extends StatelessWidget {
       ),
       elevation: 4,
       child: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [Color(0xFF00B2E7), Color(0xFFFF8D6C)],
             begin: Alignment.topLeft,
@@ -99,15 +93,9 @@ class HomePage extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-<<<<<<< HEAD
             Text('Total Balance',
                 style: TextStyle(fontSize: 18, color: Colors.white)),
             Text('\$3800',
-=======
-            const Text('Total Balance',
-                style: TextStyle(fontSize: 18, color: Colors.white)),
-            const Text('\$3800',
->>>>>>> 381017899abc09111adbb51a4e5e326f8984bf07
                 style: TextStyle(
                     fontSize: 36,
                     fontWeight: FontWeight.bold,
@@ -115,38 +103,54 @@ class HomePage extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                GestureDetector(
-                  onTap: () {
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color(0xFFF0FAFE), // Light blue color
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    padding:
+                        EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
+                  ),
+                  onPressed: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => AddIncomePage()),
                     );
                   },
-                  child: const Column(
+                  child: Column(
                     children: [
                       Icon(Icons.arrow_upward,
                           color: Color(0xFFFF8D6C), size: 32),
                       Text('Income',
-                          style: TextStyle(fontSize: 16, color: Colors.white)),
+                          style: TextStyle(fontSize: 16, color: Colors.black)),
                       Text('\$5000',
                           style: TextStyle(
                               fontSize: 20, color: Color(0xFFFF8D6C))),
                     ],
                   ),
                 ),
-                GestureDetector(
-                  onTap: () {
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color(0xFFF0FAFE), // Light blue color
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    padding:
+                        EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
+                  ),
+                  onPressed: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => AddExpensePage()),
                     );
                   },
-                  child: const Column(
+                  child: Column(
                     children: [
                       Icon(Icons.arrow_downward,
                           color: Color(0xFFFF8D6C), size: 32),
                       Text('Expenses',
-                          style: TextStyle(fontSize: 16, color: Colors.white)),
+                          style: TextStyle(fontSize: 16, color: Colors.black)),
                       Text('\$1200',
                           style: TextStyle(
                               fontSize: 20, color: Color(0xFFFF8D6C))),
@@ -164,7 +168,7 @@ class HomePage extends StatelessWidget {
   Widget _buildRecentTransactions() {
     return Expanded(
       child: ListView(
-        children: const [
+        children: [
           ListTile(
             leading: Icon(Icons.shopping_bag, color: Colors.orange),
             title: Text('Shopping'),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class SignUpPage extends StatelessWidget {
-  const SignUpPage({super.key});
+  const SignUpPage({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -33,18 +33,25 @@ class SignUpPage extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                // Navigate to login page
+                Navigator.pushNamed(context, '/login');
+              },
               style: ElevatedButton.styleFrom(
                 minimumSize: const Size(double.infinity, 50),
                 backgroundColor: const Color(0xFF00B2E7),
               ),
-              child: const Text('Sign Up', style: TextStyle(color: Colors.white)),
+              child:
+                  const Text('Sign Up', style: TextStyle(color: Colors.white)),
             ),
             const SizedBox(height: 20),
             const Text('Or continue with'),
             const SizedBox(height: 20),
             ElevatedButton.icon(
-              onPressed: () {},
+              onPressed: () {
+                // Navigate to login page
+                Navigator.pushNamed(context, '/login');
+              },
               icon: const Icon(Icons.login),
               label: const Text('Sign Up with Google'),
               style: ElevatedButton.styleFrom(

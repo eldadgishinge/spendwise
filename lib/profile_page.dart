@@ -25,7 +25,7 @@ class ProfilePage extends StatelessWidget {
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 20),
-            _buildProfileOption(context, 'Account', Icons.account_circle),
+            // _buildProfileOption(context, 'Account', Icons.account_circle),
             _buildProfileOption(
                 context, 'Settings', Icons.settings, SettingsPage()),
             _buildProfileOption(
