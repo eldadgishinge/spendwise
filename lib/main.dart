@@ -5,7 +5,7 @@ import 'resources_page.dart';
 import 'financial_quotes_page.dart';
 import 'talk_to_expert_page.dart';
 import 'signup.dart';
-import 'login.dart';
+// import 'login.dart';
 import 'reset_password.dart';
 import 'launch_screen.dart';
 
@@ -36,11 +36,11 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => LaunchScreen(),
-        '/login': (context) => LoginPage(),
-        '/signup': (context) => SignUpPage(),
+        '/login': (context) => const LoginPage(),
+        '/signup': (context) => const SignUpPage(),
         '/reset_password': (context) => ResetPasswordPage(),
-        '/home': (context) => HomePage(),
-        '/resources': (context) => ResourcesPage(),
+        '/home': (context) => const HomePage(),
+        '/resources': (context) => const ResourcesPage(),
         '/financial_quotes': (context) => FinancialQuotesPage(),
         '/talk_to_expert': (context) => TalkToExpertPage(),
       },

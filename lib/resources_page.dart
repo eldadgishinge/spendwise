@@ -3,11 +3,12 @@ import 'financial_quotes_page.dart';
 import 'talk_to_expert_page.dart';
 
 class ResourcesPage extends StatelessWidget {
+  const ResourcesPage({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Financial Resources'),
+        title: const Text('Financial Resources'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

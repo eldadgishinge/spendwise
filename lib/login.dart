@@ -9,8 +9,7 @@ class LoginPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text('Login',
-            style: TextStyle(color: Colors.white)), // Text color set to white
+        title: const Text('Login', style: TextStyle(color: Colors.white)),
         backgroundColor: Colors.white,
         elevation: 0,
         iconTheme: const IconThemeData(color: Colors.black),
@@ -27,11 +26,11 @@ class LoginPage extends StatelessWidget {
                 // Replace with your actual login logic (e.g., validate credentials, call a login API)
                 // Assuming successful login...
                 Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (context) => HomePage()));
+                    MaterialPageRoute(builder: (context) => const HomePage()));
               },
               style: ElevatedButton.styleFrom(
                 minimumSize: const Size(double.infinity, 50),
-                backgroundColor: Color.fromARGB(255, 0, 177, 231),
+                backgroundColor: const Color.fromARGB(255, 0, 177, 231),
               ),
               child:
                   const Text('Sign in', style: TextStyle(color: Colors.white)),

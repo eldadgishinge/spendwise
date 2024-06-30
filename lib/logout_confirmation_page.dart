@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
 class LogoutConfirmationPage extends StatelessWidget {
+  const LogoutConfirmationPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Logout'),
+        title: const Text('Logout'),
       ),
       body: Center(
         child: Column(
@@ -13,13 +15,13 @@ class LogoutConfirmationPage extends StatelessWidget {
           children: [
             Icon(Icons.exit_to_app,
                 size: 80, color: Theme.of(context).primaryColor),
-            SizedBox(height: 20),
-            Text(
+            const SizedBox(height: 20),
+            const Text(
               'Are you sure you want to logout?',
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 18),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -27,26 +29,26 @@ class LogoutConfirmationPage extends StatelessWidget {
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: Text('No'),
                   style: ElevatedButton.styleFrom(
-                    minimumSize: Size(100, 50),
+                    minimumSize: const Size(100, 50),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
                     ),
                   ),
+                  child: const Text('No'),
                 ),
                 ElevatedButton(
                   onPressed: () {
                     // Add logout functionality here
                   },
-                  child: Text('Yes'),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFFFF8D6C),
-                    minimumSize: Size(100, 50),
+                    backgroundColor: const Color(0xFFFF8D6C),
+                    minimumSize: const Size(100, 50),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
                     ),
                   ),
+                  child: const Text('Yes'),
                 ),
               ],
             ),
