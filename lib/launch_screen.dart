@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 
 class LaunchScreen extends StatefulWidget {
+  const LaunchScreen({super.key});
   @override
   _LaunchScreenState createState() => _LaunchScreenState();
 }
