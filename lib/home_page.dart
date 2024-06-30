@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 // import 'package:spendwise/chart.dart';
 import 'package:spendwise/stats.dart';
-import 'add_income.dart';
+// import 'add_income.dart';
+import 'dart:math';
+
+import 'package:flutter/cupertino.dart';
 import 'add_expense.dart';
 import 'resources_page.dart';
 import 'profile_page.dart';
@@ -13,15 +16,13 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Spendwise'),
-      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _buildBalanceCard(context),
-            _buildRecentTransactions(),
+            _buildRecentTransactions(context),
           ],
         ),
       ),
@@ -32,13 +33,13 @@ class HomePage extends StatelessWidget {
             MaterialPageRoute(builder: (context) => AddExpensePage()),
           );
         },
-        backgroundColor: const Color(0xFFFF8D6C),
+        backgroundColor: Theme.of(context).colorScheme.primary,
         child: const Icon(Icons.add),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
         shape: const CircularNotchedRectangle(),
-        notchMargin: 6.0,
+        notchMargin: 3.0,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
@@ -86,113 +87,169 @@ class HomePage extends StatelessWidget {
 
   Widget _buildBalanceCard(BuildContext context) {
     return Card(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
-      ),
-      elevation: 4,
-      child: Container(
-        decoration: BoxDecoration(
-          gradient: const LinearGradient(
-            colors: [Color(0xFF00B2E7), Color(0xFFFF8D6C)],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
-          borderRadius: BorderRadius.circular(10),
+        child: Container(
+      width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.width / 2,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            Theme.of(context).colorScheme.primary,
+            Theme.of(context).colorScheme.secondary,
+          ],
+          transform: const GradientRotation(pi / 4),
         ),
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            const Text('Total Balance',
-                style: TextStyle(fontSize: 18, color: Colors.white)),
-            const Text('\$3800',
-                style: TextStyle(
-                    fontSize: 36,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white)),
-            Row(
+        borderRadius: BorderRadius.circular(25),
+        boxShadow: [
+          BoxShadow(
+            color: Theme.of(context).colorScheme.outline.withOpacity(0.5),
+            blurRadius: 10,
+            offset: const Offset(0, 5),
+          )
+        ],
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Text(
+            'Total Balance',
+            style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.normal,
+                color: Colors.white),
+          ),
+          const Text(
+            '\$ 3800',
+            style: TextStyle(
+                fontSize: 40, fontWeight: FontWeight.bold, color: Colors.white),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 40),
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor:
-                        const Color(0xFFF0FAFE), // Light blue color
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
+                Row(
+                  children: [
+                    Container(
+                      width: 45,
+                      height: 45,
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        shape: BoxShape.circle,
+                      ),
+                      child: Center(
+                        child: Icon(
+                          CupertinoIcons.arrow_down,
+                          size: 18,
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                      ),
                     ),
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 16.0, horizontal: 24.0),
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => AddIncomePage()),
-                    );
-                  },
-                  child: const Column(
-                    children: [
-                      Icon(Icons.arrow_upward,
-                          color: Color(0xFFFF8D6C), size: 32),
-                      Text('Income',
-                          style: TextStyle(fontSize: 16, color: Colors.black)),
-                      Text('\$5000',
+                    const SizedBox(width: 8),
+                    const Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Income',
                           style: TextStyle(
-                              fontSize: 20, color: Color(0xFFFF8D6C))),
-                    ],
-                  ),
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.white),
+                        ),
+                        Text(
+                          '\$ 4800',
+                          style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.white),
+                        )
+                      ],
+                    )
+                  ],
                 ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor:
-                        const Color(0xFFF0FAFE), // Light blue color
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
+                Row(
+                  children: [
+                    Container(
+                      width: 45,
+                      height: 45,
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        shape: BoxShape.circle,
+                      ),
+                      child: Center(
+                        child: Icon(
+                          CupertinoIcons.arrow_up,
+                          size: 18,
+                          color: Theme.of(context).colorScheme.secondary,
+                        ),
+                      ),
                     ),
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 16.0, horizontal: 24.0),
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => AddExpensePage()),
-                    );
-                  },
-                  child: const Column(
-                    children: [
-                      Icon(Icons.arrow_downward,
-                          color: Color(0xFFFF8D6C), size: 32),
-                      Text('Expenses',
-                          style: TextStyle(fontSize: 16, color: Colors.black)),
-                      Text('\$1200',
+                    const SizedBox(width: 8),
+                    const Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Expenses',
                           style: TextStyle(
-                              fontSize: 20, color: Color(0xFFFF8D6C))),
-                    ],
-                  ),
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.white),
+                        ),
+                        Text(
+                          '\$ 1800',
+                          style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.white),
+                        )
+                      ],
+                    )
+                  ],
                 ),
               ],
             ),
-          ],
-        ),
+          )
+        ],
       ),
-    );
+    ));
   }
 
-  Widget _buildRecentTransactions() {
+  Widget _buildRecentTransactions(BuildContext context) {
     return Expanded(
       child: ListView(
-        children: const [
-          ListTile(
+        children: [
+          const SizedBox(height: 20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Recent Transactions',
+                style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).colorScheme.outline),
+              ),
+              Text(
+                'View all',
+                style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                    color: Theme.of(context).colorScheme.primary),
+              ),
+            ],
+          ),
+          const ListTile(
             leading: Icon(Icons.shopping_bag, color: Colors.orange),
             title: Text('Shopping'),
             subtitle: Text('Buy some grocery'),
             trailing: Text('- \$120'),
           ),
-          ListTile(
+          const ListTile(
             leading: Icon(Icons.subscriptions, color: Colors.purple),
             title: Text('Subscription'),
             subtitle: Text('Coursera Student'),
             trailing: Text('- \$80'),
           ),
-          ListTile(
+          const ListTile(
             leading: Icon(Icons.fastfood, color: Colors.red),
             title: Text('Food'),
             subtitle: Text('Buy a ramen'),
