@@ -1,6 +1,10 @@
-# spendwise
+# Spendwise
 
-This is a new Flutter project.
+SpendWise is a mobile application designed specifically for university students to help them track their expenses and manage their finances effectively
+
+## Demo Video
+
+https://drive.google.com/file/d/13N4OF-DGOfmtgW1Z1fGUVIqNfQTSwj1r/view?usp=sharing
 
 ## Getting Started
 
