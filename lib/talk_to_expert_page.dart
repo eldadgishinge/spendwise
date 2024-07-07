@@ -9,18 +9,18 @@ class TalkToExpertPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Talk to an Expert'),
+        title: const Text('Talk to an Expert'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            CircleAvatar(
+            const CircleAvatar(
               radius: 50,
               backgroundImage: AssetImage(
                   'assets/expert.png'), // Replace with your asset image path
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             TextField(
               controller: _nameController,
               decoration: InputDecoration(
@@ -32,7 +32,7 @@ class TalkToExpertPage extends StatelessWidget {
                 fillColor: Colors.grey[200],
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             TextField(
               controller: _emailController,
               decoration: InputDecoration(
@@ -44,7 +44,7 @@ class TalkToExpertPage extends StatelessWidget {
                 fillColor: Colors.grey[200],
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             TextField(
               controller: _messageController,
               maxLines: 4,
@@ -57,7 +57,7 @@ class TalkToExpertPage extends StatelessWidget {
                 fillColor: Colors.grey[200],
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             ElevatedButton(
               onPressed: () {
                 // Handle send action
@@ -65,10 +65,10 @@ class TalkToExpertPage extends StatelessWidget {
                 print('E-mail: ${_emailController.text}');
                 print('Message: ${_messageController.text}');
               },
-              child: Text('Send'),
+              child: const Text('Send'),
               style: ElevatedButton.styleFrom(
-                minimumSize: Size(double.infinity, 50),
-                backgroundColor: Color(0xFF00B2E7),
+                minimumSize: const Size(double.infinity, 50),
+                backgroundColor: const Color(0xFF00B2E7),
               ),
             ),
           ],

@@ -72,11 +72,11 @@ class LoginPage extends StatelessWidget {
               onPressed: () {
                 Navigator.pushReplacementNamed(context, '/home');
               },
-              child: const Text('Login'),
               style: ElevatedButton.styleFrom(
                 minimumSize: const Size(double.infinity, 50),
                 backgroundColor: const Color(0xFF00B2E7),
               ),
+              child: const Text('Login', style: TextStyle(color: Colors.white)),
             ),
             const SizedBox(height: 20),
             GestureDetector(

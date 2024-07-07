@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'settings_page.dart';
 import 'export_data_page.dart';
@@ -31,9 +33,9 @@ class ProfilePage extends StatelessWidget {
             _buildProfileOption(
                 context, 'Settings', Icons.settings, SettingsPage()),
             _buildProfileOption(
-                context, 'Export Data', Icons.cloud_download, ExportDataPage()),
+                context, 'Export Data', Icons.cloud_download, const ExportDataPage()),
             _buildProfileOption(
-                context, 'Logout', Icons.exit_to_app, LogoutConfirmationPage()),
+                context, 'Logout', Icons.exit_to_app, const LogoutConfirmationPage()),
           ],
         ),
       ),

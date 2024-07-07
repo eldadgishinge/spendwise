@@ -1,23 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:spendwise/home_page.dart';
 
 import 'profile_page.dart';
+import 'add_expense.dart';
 import 'resources_page.dart';
-
-class FinancialReportApp extends StatelessWidget {
-  const FinancialReportApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Financial Report',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const FinancialReportScreen(),
-    );
-  }
-}
 
 class FinancialReportScreen extends StatelessWidget {
   const FinancialReportScreen({super.key});
@@ -25,7 +11,18 @@ class FinancialReportScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      // backgroundColor: Colors.white,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => AddExpensePage()),
+          );
+        },
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        child: const Icon(Icons.add),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
         shape: const CircularNotchedRectangle(),
         notchMargin: 6.0,
@@ -35,7 +32,11 @@ class FinancialReportScreen extends StatelessWidget {
             IconButton(
               icon: const Icon(Icons.home),
               onPressed: () {
-                Navigator.pushReplacementNamed(context, '/home');
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const HomePage()),
+                );
               },
             ),
             IconButton(
@@ -44,7 +45,7 @@ class FinancialReportScreen extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const FinancialReportApp()),
+                      builder: (context) => const FinancialReportScreen()),
                 );
               },
             ),

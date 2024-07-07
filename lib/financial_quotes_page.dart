@@ -28,7 +28,7 @@ class FinancialQuotesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Financial Quotes'),
+        title: const Text('Financial Quotes'),
       ),
       body: ListView.builder(
         padding: const EdgeInsets.all(16.0),
@@ -43,12 +43,12 @@ class FinancialQuotesPage extends StatelessWidget {
                 children: [
                   Text(
                     quotes[index]['quote']!,
-                    style: TextStyle(fontSize: 18, fontStyle: FontStyle.italic),
+                    style: const TextStyle(fontSize: 18, fontStyle: FontStyle.italic),
                   ),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   Text(
                     '- ${quotes[index]['author']}',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                 ],
               ),

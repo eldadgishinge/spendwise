@@ -55,7 +55,7 @@ class HomePage extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const FinancialReportApp()),
+                      builder: (context) => const FinancialReportScreen()),
                 );
               },
             ),
@@ -221,12 +221,13 @@ class HomePage extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
+              const Text(
                 'Recent Transactions',
                 style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Theme.of(context).colorScheme.outline),
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  // color: Theme.of(context).colorScheme.outline
+                ),
               ),
               Text(
                 'View all',

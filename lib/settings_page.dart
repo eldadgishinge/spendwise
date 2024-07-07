@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
 class SettingsPage extends StatelessWidget {
+  const SettingsPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Settings'),
+        title: const Text('Settings'),
       ),
       body: ListView(
         children: [
@@ -31,9 +33,9 @@ class SettingsPage extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
       child: ListTile(
         title: Text(title,
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
+            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
         subtitle: subtitle.isNotEmpty ? Text(subtitle) : null,
-        trailing: Icon(Icons.arrow_forward_ios, size: 18),
+        trailing: const Icon(Icons.arrow_forward_ios, size: 18),
         onTap: () {
           // Add navigation to setting detail pages if necessary
         },
