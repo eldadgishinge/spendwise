@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import
+
 import 'package:flutter/material.dart';
 // import 'package:spendwise/chart.dart';
 import 'package:spendwise/stats.dart';
@@ -30,7 +32,7 @@ class HomePage extends StatelessWidget {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => AddExpensePage()),
+            MaterialPageRoute(builder: (context) => const AddExpensePage()),
           );
         },
         backgroundColor: Theme.of(context).colorScheme.primary,

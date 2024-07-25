@@ -16,7 +16,7 @@ class FinancialReportScreen extends StatelessWidget {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => AddExpensePage()),
+            MaterialPageRoute(builder: (context) => const AddExpensePage()),
           );
         },
         backgroundColor: Theme.of(context).colorScheme.primary,
