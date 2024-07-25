@@ -1,8 +1,23 @@
-import 'package:flutter/material.dart';
-import 'home_page.dart'; // Ensure HomePage is imported
+// ignore_for_file: use_build_context_synchronously
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({Key? key});
+import 'package:flutter/material.dart';
+import 'package:spendwise/auth/firebase_auth_services.dart';
+import 'package:spendwise/global/toast.dart';
+import 'home_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final FirebaseAuthService _auth = FirebaseAuthService();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  String _errorMessage = '';
 
   @override
   Widget build(BuildContext context) {
@@ -18,16 +33,11 @@ class LoginPage extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: <Widget>[
-            _buildTextField('Email'),
-            _buildTextField('Password', isPassword: true),
+            _buildTextField('Email', _emailController),
+            _buildTextField('Password', _passwordController, isPassword: true),
             const SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () {
-                // Replace with your actual login logic (e.g., validate credentials, call a login API)
-                // Assuming successful login...
-                Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (context) => const HomePage()));
-              },
+              onPressed: _login,
               style: ElevatedButton.styleFrom(
                 minimumSize: const Size(double.infinity, 50),
                 backgroundColor: const Color.fromARGB(255, 0, 177, 231),
@@ -53,16 +63,26 @@ class LoginPage extends StatelessWidget {
                 style: TextStyle(color: Theme.of(context).colorScheme.outline),
               ),
             ),
+            if (_errorMessage.isNotEmpty)
+              Padding(
+                padding: const EdgeInsets.only(top: 20.0),
+                child: Text(
+                  _errorMessage,
+                  style: const TextStyle(color: Colors.red),
+                ),
+              ),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildTextField(String label, {bool isPassword = false}) {
+  Widget _buildTextField(String label, TextEditingController controller,
+      {bool isPassword = false}) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: TextField(
+        controller: controller,
         decoration: InputDecoration(
           labelText: label,
           labelStyle: TextStyle(color: Colors.grey[500], fontSize: 14.0),
@@ -77,5 +97,29 @@ class LoginPage extends StatelessWidget {
         obscureText: isPassword,
       ),
     );
+  }
+
+  Future<void> _login() async {
+    try {
+      final String email = _emailController.text;
+      final String password = _passwordController.text;
+
+      User? user = await _auth.signInWithEmailAndPassword(email, password);
+
+      if (user != null) {
+        showToast(message: 'Login successful');
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const HomePage(),
+          ),
+        );
+      }
+    } on FirebaseAuthException catch (e) {
+      setState(() {
+        _errorMessage = e.message ?? 'An unknown error occurred';
+        showToast(message: _errorMessage);
+      });
+    }
   }
 }

@@ -1,7 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:spendwise/auth/firebase_auth_services.dart';
+import 'package:spendwise/global/toast.dart';
+import 'home_page.dart';
 
-class SignUpPage extends StatelessWidget {
+class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key});
+
+  @override
+  State<SignUpPage> createState() => SignUpPageState();
+}
+
+class SignUpPageState extends State<SignUpPage> {
+  final FirebaseAuthService _auth = FirebaseAuthService();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  bool _termsAccepted = false;
+  String _errorMessage = '';
 
   @override
   Widget build(BuildContext context) {
@@ -17,14 +33,21 @@ class SignUpPage extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: <Widget>[
-            _buildTextField('Name'),
-            _buildTextField('Email'),
-            _buildTextField('Password', isPassword: true),
+            _buildTextField('Name', _nameController),
+            _buildTextField('Email', _emailController),
+            _buildTextField('Password', _passwordController, isPassword: true),
             const SizedBox(height: 20),
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Checkbox(value: false, onChanged: (bool? value) {}),
+                Checkbox(
+                  value: _termsAccepted,
+                  onChanged: (bool? value) {
+                    setState(() {
+                      _termsAccepted = value ?? false;
+                    });
+                  },
+                ),
                 const Text(
                   'By signing up, you agree to the ',
                   style: TextStyle(fontWeight: FontWeight.w500),
@@ -38,10 +61,7 @@ class SignUpPage extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () {
-                // Navigate to login page
-                Navigator.pushNamed(context, '/login');
-              },
+              onPressed: _termsAccepted ? _signUp : null,
               style: ElevatedButton.styleFrom(
                 minimumSize: const Size(double.infinity, 50),
                 backgroundColor: const Color(0xFF00B2E7),
@@ -53,12 +73,20 @@ class SignUpPage extends StatelessWidget {
                   const Text('Sign Up', style: TextStyle(color: Colors.white)),
             ),
             const SizedBox(height: 20),
+            if (_errorMessage.isNotEmpty)
+              Padding(
+                padding: const EdgeInsets.only(top: 20.0),
+                child: Text(
+                  _errorMessage,
+                  style: const TextStyle(color: Colors.red),
+                ),
+              ),
+            const SizedBox(height: 20),
             const Text('Or continue with'),
             const SizedBox(height: 20),
             ElevatedButton.icon(
               onPressed: () {
-                // Navigate to login page
-                Navigator.pushNamed(context, '/login');
+                // Implement Google Sign-Up logic here
               },
               icon: Image.asset(
                 'assets/google-icon.png',
@@ -91,10 +119,12 @@ class SignUpPage extends StatelessWidget {
     );
   }
 
-  Widget _buildTextField(String label, {bool isPassword = false}) {
+  Widget _buildTextField(String label, TextEditingController controller,
+      {bool isPassword = false}) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: TextField(
+        controller: controller,
         decoration: InputDecoration(
           labelText: label,
           labelStyle: TextStyle(color: Colors.grey[500], fontSize: 14.0),
@@ -109,5 +139,28 @@ class SignUpPage extends StatelessWidget {
         obscureText: isPassword,
       ),
     );
+  }
+
+  Future<void> _signUp() async {
+    try {
+      final String email = _emailController.text.trim();
+      final String password = _passwordController.text.trim();
+
+      User? userCredential = await _auth.signUpWithEmailAndPassword(
+        email,
+        password,
+      );
+      if (userCredential != null) {
+        // Optionally update the user's display name
+        showToast(message: 'Sign up successful');
+        await userCredential.updateDisplayName(_nameController.text.trim());
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => const HomePage()));
+      }
+    } on FirebaseAuthException catch (e) {
+      setState(() {
+        _errorMessage = e.message ?? 'An unknown error occurred';
+      });
+    }
   }
 }

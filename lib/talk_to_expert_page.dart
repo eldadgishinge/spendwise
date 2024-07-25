@@ -5,6 +5,8 @@ class TalkToExpertPage extends StatelessWidget {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _messageController = TextEditingController();
 
+  TalkToExpertPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,11 +67,11 @@ class TalkToExpertPage extends StatelessWidget {
                 print('E-mail: ${_emailController.text}');
                 print('Message: ${_messageController.text}');
               },
-              child: const Text('Send'),
               style: ElevatedButton.styleFrom(
                 minimumSize: const Size(double.infinity, 50),
                 backgroundColor: const Color(0xFF00B2E7),
               ),
+              child: const Text('Send'),
             ),
           ],
         ),

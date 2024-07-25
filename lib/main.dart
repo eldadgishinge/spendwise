@@ -1,15 +1,31 @@
+import 'dart:async';
+
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:spendwise/firebase_options.dart';
 import 'home_page.dart';
 import 'resources_page.dart';
 import 'financial_quotes_page.dart';
 import 'talk_to_expert_page.dart';
 import 'signup.dart';
-// import 'login.dart';
+import 'package:logger/logger.dart';
 import 'reset_password.dart';
 import 'launch_screen.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-void main() {
+Future<void> main() async {
+  await dotenv.load();
+  WidgetsFlutterBinding.ensureInitialized();
+  final logger = Logger(); // Initialize a Logger instance
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  FirebaseAuth.instance.authStateChanges().listen((User? user) {
+    logger.i('User: $user');
+  });
   runApp(const MyApp());
 }
 

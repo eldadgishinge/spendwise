@@ -26,11 +26,11 @@ class AddIncomePage extends StatelessWidget {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {},
-              child: const Text('Continue'),
               style: ElevatedButton.styleFrom(
                 minimumSize: const Size(double.infinity, 50),
                 backgroundColor: Colors.blue,
               ),
+              child: const Text('Continue'),
             ),
           ],
         ),
