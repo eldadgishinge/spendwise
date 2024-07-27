@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "272980882693",
+    "firebase_url": "https://spendwise-4edb5-default-rtdb.europe-west1.firebasedatabase.app",
     "project_id": "spendwise-4edb5",
     "storage_bucket": "spendwise-4edb5.appspot.com"
   },
@@ -29,6 +30,13 @@
             {
               "client_id": "272980882693-nc95d1rkj2beeum8lhjnfd5ic64t5tu5.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "272980882693-pskjbll9umlikroohjj7hfboucavk98t.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.spendwise"
+              }
             }
           ]
         }

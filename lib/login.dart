@@ -1,7 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
-import 'package:spendwise/auth/firebase_auth_services.dart';
+import 'package:spendwise/firebase/auth/firebase_auth_services.dart';
 import 'package:spendwise/global/toast.dart';
 import 'home_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -81,7 +81,7 @@ class _LoginPageState extends State<LoginPage> {
       {bool isPassword = false}) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
-      child: TextField(
+      child: TextFormField(
         controller: controller,
         decoration: InputDecoration(
           labelText: label,
@@ -95,11 +95,30 @@ class _LoginPageState extends State<LoginPage> {
           suffixIcon: isPassword ? const Icon(Icons.visibility) : null,
         ),
         obscureText: isPassword,
+        validator: (value) {
+          if (label == 'Email') {
+            if (value == null || value.isEmpty) {
+              return 'Please enter your email';
+            }
+            if (!value.contains('@') || !value.contains('.')) {
+              return 'Please enter a valid email address';
+            }
+          } else if (label == 'Password') {
+            if (value == null || value.isEmpty) {
+              return 'Please enter your password';
+            }
+            if (value.length < 6) {
+              return 'Password must be at least 6 characters long';
+            }
+          }
+          return null;
+        },
       ),
     );
   }
 
   Future<void> _login() async {
+    print('Login button pressed');
     try {
       final String email = _emailController.text;
       final String password = _passwordController.text;
@@ -107,7 +126,11 @@ class _LoginPageState extends State<LoginPage> {
       User? user = await _auth.signInWithEmailAndPassword(email, password);
 
       if (user != null) {
-        showToast(message: 'Login successful');
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+              content: Text('Login successful'),
+              backgroundColor: Color(0xFF00B2E7)),
+        );
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(

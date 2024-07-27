@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:spendwise/firebase/auth/firebase_auth_services.dart';
 
 class LogoutConfirmationPage extends StatelessWidget {
   const LogoutConfirmationPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final FirebaseAuthService auth = FirebaseAuthService();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Logout'),
@@ -38,8 +40,8 @@ class LogoutConfirmationPage extends StatelessWidget {
                   child: const Text('No'),
                 ),
                 ElevatedButton(
-                  onPressed: () {
-                    // Add logout functionality here
+                  onPressed: () async {
+                    await auth.signOut();
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFFFF8D6C),

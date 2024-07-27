@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:spendwise/auth/firebase_auth_services.dart';
+import 'package:spendwise/firebase/auth/firebase_auth_services.dart';
 import 'package:spendwise/global/toast.dart';
 import 'home_page.dart';
 
 class SignUpPage extends StatefulWidget {
-  const SignUpPage({Key? key});
+  const SignUpPage({super.key});
 
   @override
   State<SignUpPage> createState() => SignUpPageState();

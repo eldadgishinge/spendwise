@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import '../../../global/toast.dart';
+import '../../../../global/toast.dart';
 
 class FirebaseAuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -38,5 +38,9 @@ class FirebaseAuthService {
       }
     }
     return null;
+  }
+
+  Future<void> signOut() async {
+    await _auth.signOut();
   }
 }

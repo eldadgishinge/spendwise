@@ -1,7 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:spendwise/utils.dart';
 
-class AddIncomePage extends StatelessWidget {
+class AddIncomePage extends StatefulWidget {
   const AddIncomePage({super.key});
+
+  @override
+  State<AddIncomePage> createState() => _AddIncomePageState();
+}
+
+class _AddIncomePageState extends State<AddIncomePage> {
+  final _formKey = GlobalKey<FormState>();
+  final TextEditingController _amountController = TextEditingController();
+  final TextEditingController _categoryController = TextEditingController();
+  final TextEditingController _descriptionController = TextEditingController();
+  bool _recurring = false;
 
   @override
   Widget build(BuildContext context) {
@@ -20,12 +32,20 @@ class AddIncomePage extends StatelessWidget {
             const SizedBox(height: 20),
             _buildTextField('Category'),
             _buildTextField('Description'),
-            _buildTextField('Wallet'),
             _buildAttachmentButton(),
             _buildRepeatSwitch(),
             const SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                addTransaction(
+                    context: context,
+                    formKey: _formKey,
+                    type: 'income',
+                    amountController: _amountController,
+                    categoryController: _categoryController,
+                    descriptionController: _descriptionController,
+                    recurring: _recurring);
+              },
               style: ElevatedButton.styleFrom(
                 minimumSize: const Size(double.infinity, 50),
                 backgroundColor: Colors.blue,
