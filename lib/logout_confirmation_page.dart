@@ -42,6 +42,7 @@ class LogoutConfirmationPage extends StatelessWidget {
                 ElevatedButton(
                   onPressed: () async {
                     await auth.signOut();
+                    Navigator.pushReplacementNamed(context, '/login');
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFFFF8D6C),

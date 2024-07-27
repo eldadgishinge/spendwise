@@ -1,5 +1,6 @@
 // ignore_for_file: unused_import
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 // import 'package:spendwise/chart.dart';
 import 'package:spendwise/stats.dart';
@@ -7,6 +8,7 @@ import 'package:spendwise/stats.dart';
 import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
+import 'package:spendwise/utils.dart';
 import 'add_expense.dart';
 import 'resources_page.dart';
 import 'profile_page.dart';
@@ -216,50 +218,70 @@ class HomePage extends StatelessWidget {
   }
 
   Widget _buildRecentTransactions(BuildContext context) {
-    return Expanded(
-      child: ListView(
-        children: [
-          const SizedBox(height: 20),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return FutureBuilder<QuerySnapshot<Map<String, dynamic>>>(
+      future: getTransactions(),
+      builder: (context, snapshot) {
+        print(snapshot);
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
+        }
+
+        if (snapshot.hasError) {
+          return const Center(child: Text('Error fetching transactions'));
+        }
+
+        final transactions = snapshot.data?.docs ?? [];
+
+        return Expanded(
+          child: ListView(
             children: [
-              const Text(
-                'Recent Transactions',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  // color: Theme.of(context).colorScheme.outline
+              const SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    'Recent Transactions',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      // color: Theme.of(context).colorScheme.outline
+                    ),
+                  ),
+                  Text(
+                    'View all',
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                  ),
+                ],
+              ),
+              for (var transaction in transactions)
+                ListTile(
+                  leading: _getIconForTransactionType(transaction['category']),
+                  title: Text(transaction['type']),
+                  subtitle: Text(transaction['description']),
+                  trailing: Text('- \$${transaction['amount']}'),
                 ),
-              ),
-              Text(
-                'View all',
-                style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                    color: Theme.of(context).colorScheme.primary),
-              ),
             ],
           ),
-          const ListTile(
-            leading: Icon(Icons.shopping_bag, color: Colors.orange),
-            title: Text('Shopping'),
-            subtitle: Text('Buy some grocery'),
-            trailing: Text('- \$120'),
-          ),
-          const ListTile(
-            leading: Icon(Icons.subscriptions, color: Colors.purple),
-            title: Text('Subscription'),
-            subtitle: Text('Coursera Student'),
-            trailing: Text('- \$80'),
-          ),
-          const ListTile(
-            leading: Icon(Icons.fastfood, color: Colors.red),
-            title: Text('Food'),
-            subtitle: Text('Buy a ramen'),
-            trailing: Text('- \$32'),
-          ),
-        ],
-      ),
+        );
+      },
     );
+  }
+
+  Icon _getIconForTransactionType(String type) {
+    switch (type) {
+      case 'Shopping':
+        return const Icon(Icons.shopping_bag, color: Colors.orange);
+      case 'Subscription':
+        return const Icon(Icons.subscriptions, color: Colors.purple);
+      case 'Food':
+        return const Icon(Icons.fastfood, color: Colors.red);
+      default:
+        return const Icon(
+            Icons.category); // Placeholder icon or handle other types
+    }
   }
 }

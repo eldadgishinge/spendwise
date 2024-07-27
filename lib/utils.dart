@@ -43,3 +43,15 @@ Future<void> addTransaction({
     formKey.currentState!.reset();
   }
 }
+
+// read all transactions
+Future<QuerySnapshot<Map<String, dynamic>>> getTransactions() async {
+  final userAuth = FirebaseAuth.instance.currentUser;
+  final db = FirebaseFirestore.instance;
+  final transactions = db.collection('transactions')
+      .where('userId', isEqualTo: userAuth!.uid)
+      .orderBy('date', descending: true)
+      .get();
+
+  return transactions;
+}
