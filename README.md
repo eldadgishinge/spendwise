@@ -1,33 +1,71 @@
-# Spendwise
+# SpendWise Project
 
-SpendWise is a mobile application designed specifically for university students to help them track their expenses and manage their finances effectively
+## Overview
 
-## Demo Video
+SpendWise is a mobile application designed to help university students manage their finances effectively. By integrating features like expense tracking, budget setting, and financial advice, SpendWise empowers students to make informed financial decisions.
 
-https://drive.google.com/file/d/13N4OF-DGOfmtgW1Z1fGUVIqNfQTSwj1r/view?usp=sharing
+## 📹 Demo Video
 
-## Getting Started
+Watch our [demo video on YouTube](https://youtu.be/ot52stKWcuY) 📺
 
-This project is a starting point for a Flutter application.
+## 🔗 GitHub Repository
 
-A few resources to get you started if this is your first Flutter project:
+Access the project on [GitHub](https://github.com/eldadgishinge/spendwise)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Team Members
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Eldad Gishinge
+- Kalisa Honore
+- Umutoni Elnaam
 
-Usage
-Register/Login: Create an account or log in with your existing credentials.
-Add Income/Expense: Navigate to the 'Add Transaction' section to record your income or expenses.
-View Reports: Check the 'Reports' section for detailed insights into your spending and saving patterns.
+## Project Features
 
-Contributing
-We welcome contributions from the community! To contribute:
+### 1. Expense Tracking
+- Log daily expenses
+- Categorize spending (e.g., food, transportation)
 
-Fork the repository.
-Create a new branch for your feature or bugfix.
-Commit your changes and push the branch to your fork.
-Open a pull request detailing your changes.
+### 2. Budget Setting
+- Set monthly or weekly budget limits
+- Receive notifications when approaching budget limits
+
+### 3. Financial Education
+- Access motivational quotes and articles
+- Improve financial literacy with tailored content
+
+### 4. Advice Service
+- Submit financial questions
+- Receive expert guidance within seven business days
+
+### 5. Reporting
+- Generate reports on spending habits
+- Visualize budget adherence and financial trends
+
+## Technical Implementation
+
+### Development Environment
+- **Android Studio** and **Flutter** for development
+
+### Database
+- **Firebase Firestore** for real-time data management
+
+### Authentication
+- **Firebase Authentication** for secure user login
+
+### APIs
+- Custom APIs for financial advice service
+- Integration with third-party notifications
+
+### Testing
+- Comprehensive unit and integration testing
+- Tested on various Android devices
+
+## Utilization Guide
+
+### Prerequisites
+- Install [Flutter](https://flutter.dev/docs/get-started/install) and [Android Studio](https://developer.android.com/studio)
+
+### Installation
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/eldadgishinge/spendwise.git
+
