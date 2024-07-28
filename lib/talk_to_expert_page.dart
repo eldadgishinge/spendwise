@@ -11,7 +11,7 @@ class TalkToExpertPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Talk to an Expert'),
+        title: const Text('Talk to an Expert', style: TextStyle(color: Colors.white)),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

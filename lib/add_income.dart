@@ -57,7 +57,6 @@ class _AddIncomePageState extends State<AddIncomePage> {
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
-                  print('Adding income');
                   addTransaction(
                       context: context,
                       formKey: _formKey,

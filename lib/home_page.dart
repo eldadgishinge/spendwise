@@ -91,142 +91,175 @@ class HomePage extends StatelessWidget {
   }
 
   Widget _buildBalanceCard(BuildContext context) {
-    return Card(
-        child: Container(
-      width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.width / 2,
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            Theme.of(context).colorScheme.primary,
-            Theme.of(context).colorScheme.secondary,
-          ],
-          transform: const GradientRotation(pi / 4),
-        ),
-        borderRadius: BorderRadius.circular(25),
-        boxShadow: [
-          BoxShadow(
-            color: Theme.of(context).colorScheme.outline.withOpacity(0.5),
-            blurRadius: 10,
-            offset: const Offset(0, 5),
-          )
-        ],
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Text(
-            'Total Balance',
-            style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.normal,
-                color: Colors.white),
+    return FutureBuilder<QuerySnapshot<Map<String, dynamic>>>(
+      future: getTransactions(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
+        }
+
+        if (snapshot.hasError) {
+          return const Center(child: Text('Error fetching transactions'));
+        }
+
+        final transactions = snapshot.data?.docs ?? [];
+        double totalIncome = 0;
+        double totalExpenses = 0;
+
+        for (var transaction in transactions) {
+          // Parse the amount string to a double
+          double amount =
+              double.tryParse(transaction['amount'].toString()) ?? 0;
+          if (transaction['type'] == 'income') {
+            totalIncome += amount;
+          } else if (transaction['type'] == 'expense') {
+            totalExpenses += amount;
+          }
+        }
+
+        double totalBalance = totalIncome - totalExpenses;
+
+        return Card(
+            child: Container(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.width / 2,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Theme.of(context).colorScheme.primary,
+                Theme.of(context).colorScheme.secondary,
+              ],
+              transform: const GradientRotation(pi / 4),
+            ),
+            borderRadius: BorderRadius.circular(25),
+            boxShadow: [
+              BoxShadow(
+                color: Theme.of(context).colorScheme.outline.withOpacity(0.5),
+                blurRadius: 10,
+                offset: const Offset(0, 5),
+              )
+            ],
           ),
-          const Text(
-            '\$ 3800',
-            style: TextStyle(
-                fontSize: 40, fontWeight: FontWeight.bold, color: Colors.white),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 40),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text(
+                'Total Balance',
+                style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.normal,
+                    color: Colors.white),
+              ),
+              Text(
+                '\$ ${totalBalance.toStringAsFixed(2)}',
+                style: const TextStyle(
+                    fontSize: 40,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white),
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 12, horizontal: 40),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Container(
-                      width: 45,
-                      height: 45,
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                        shape: BoxShape.circle,
-                      ),
-                      child: Center(
-                        child: Icon(
-                          CupertinoIcons.arrow_down,
-                          size: 18,
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 8),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                    Row(
                       children: [
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const AddIncomePage(),
-                              ),
-                            );
-                          },
-                          child: const Text(
-                            'Income',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.white,
+                        Container(
+                          width: 45,
+                          height: 45,
+                          decoration: const BoxDecoration(
+                            color: Colors.white,
+                            shape: BoxShape.circle,
+                          ),
+                          child: Center(
+                            child: Icon(
+                              CupertinoIcons.arrow_down,
+                              size: 18,
+                              color: Theme.of(context).colorScheme.primary,
                             ),
                           ),
                         ),
-                        const Text(
-                          '\$ 4800',
-                          style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.white),
+                        const SizedBox(width: 8),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const AddIncomePage(),
+                                  ),
+                                );
+                              },
+                              child: const Text(
+                                'Income',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                            Text(
+                              '\$ ${totalIncome.toStringAsFixed(2)}',
+                              style: const TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.white),
+                            )
+                          ],
                         )
                       ],
-                    )
-                  ],
-                ),
-                Row(
-                  children: [
-                    Container(
-                      width: 45,
-                      height: 45,
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                        shape: BoxShape.circle,
-                      ),
-                      child: Center(
-                        child: Icon(
-                          CupertinoIcons.arrow_up,
-                          size: 18,
-                          color: Theme.of(context).colorScheme.secondary,
-                        ),
-                      ),
                     ),
-                    const SizedBox(width: 8),
-                    const Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                    Row(
                       children: [
-                        Text(
-                          'Expenses',
-                          style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.white),
+                        Container(
+                          width: 45,
+                          height: 45,
+                          decoration: const BoxDecoration(
+                            color: Colors.white,
+                            shape: BoxShape.circle,
+                          ),
+                          child: Center(
+                            child: Icon(
+                              CupertinoIcons.arrow_up,
+                              size: 18,
+                              color: Theme.of(context).colorScheme.secondary,
+                            ),
+                          ),
                         ),
-                        Text(
-                          '\$ 1800',
-                          style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.white),
+                        const SizedBox(width: 8),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              'Expenses',
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.white),
+                            ),
+                            Text(
+                              '\$ ${totalExpenses.toStringAsFixed(2)}',
+                              style: const TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.white),
+                            )
+                          ],
                         )
                       ],
-                    )
+                    ),
                   ],
                 ),
-              ],
-            ),
-          )
-        ],
-      ),
-    ));
+              )
+            ],
+          ),
+        ));
+      },
+    );
   }
 
   Widget _buildRecentTransactions(BuildContext context) {

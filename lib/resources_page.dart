@@ -19,7 +19,7 @@ class ResourcesPage extends StatelessWidget {
               'Financial Quotes',
               'Daily inspiring financial wisdom',
               Icons.account_balance,
-              FinancialQuotesPage(),
+              const FinancialQuotesPage(),
             ),
             _buildResourceTile(
               context,
