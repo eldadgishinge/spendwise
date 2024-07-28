@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'settings_page.dart';
 import 'export_data_page.dart';
@@ -10,6 +11,7 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final user = FirebaseAuth.instance.currentUser;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Profile'),
@@ -24,18 +26,18 @@ class ProfilePage extends StatelessWidget {
                   'https://example.com/profile_image.jpg'), // Replace with the actual image URL
             ),
             const SizedBox(height: 10),
-            const Text(
-              'ALU Student',
+            Text(
+              user?.displayName ?? 'Guest',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 20),
             // _buildProfileOption(context, 'Account', Icons.account_circle),
             _buildProfileOption(
                 context, 'Settings', Icons.settings, SettingsPage()),
-            _buildProfileOption(
-                context, 'Export Data', Icons.cloud_download, const ExportDataPage()),
-            _buildProfileOption(
-                context, 'Logout', Icons.exit_to_app, const LogoutConfirmationPage()),
+            _buildProfileOption(context, 'Export Data', Icons.cloud_download,
+                const ExportDataPage()),
+            _buildProfileOption(context, 'Logout', Icons.exit_to_app,
+                const LogoutConfirmationPage()),
           ],
         ),
       ),
@@ -62,7 +64,8 @@ class ProfilePage extends StatelessWidget {
         child: ListTile(
           leading: Icon(icon, color: Theme.of(context).primaryColor, size: 30),
           title: Text(title,
-              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
+              style:
+                  const TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
         ),
       ),
     );
