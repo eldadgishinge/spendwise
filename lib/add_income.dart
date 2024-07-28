@@ -20,18 +20,35 @@ class _AddIncomePageState extends State<AddIncomePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
-        title: const Text('Add Income'),
+        title: const Text('Add Income', style: TextStyle(color: Colors.white)),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
             const Text('How much was made?', style: TextStyle(fontSize: 18)),
-            const Text('\$0',
-                style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold)),
+            TextFormField(
+              controller: _amountController,
+              keyboardType: TextInputType.number,
+              decoration: const InputDecoration(
+                labelText: '\$0',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(12.0)),
+                ),
+                filled: true,
+                fillColor: Colors.white,
+              ),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter an amount';
+                }
+                return null;
+              },
+              style: const TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
+            ),
             const SizedBox(height: 20),
-            _buildTextField('Category'),
-            _buildTextField('Description'),
+            _buildTextField(_categoryController, 'Category'),
+            _buildTextField(_descriptionController, 'Description'),
             _buildAttachmentButton(),
             _buildRepeatSwitch(),
             const SizedBox(height: 20),
@@ -44,13 +61,17 @@ class _AddIncomePageState extends State<AddIncomePage> {
                     amountController: _amountController,
                     categoryController: _categoryController,
                     descriptionController: _descriptionController,
-                    recurring: _recurring);
+                    recurring: _recurring
+                );
               },
               style: ElevatedButton.styleFrom(
                 minimumSize: const Size(double.infinity, 50),
                 backgroundColor: Colors.blue,
               ),
-              child: const Text('Continue'),
+              child: const Text(
+                'Continue',
+                style: TextStyle(color: Colors.white),
+              ),
             ),
           ],
         ),
@@ -58,10 +79,11 @@ class _AddIncomePageState extends State<AddIncomePage> {
     );
   }
 
-  Widget _buildTextField(String label) {
+  Widget _buildTextField(TextEditingController controller, String label) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
-      child: TextField(
+      child: TextFormField(
+        controller: controller,
         decoration: InputDecoration(
           labelText: label,
           border: OutlineInputBorder(
@@ -70,6 +92,12 @@ class _AddIncomePageState extends State<AddIncomePage> {
           filled: true,
           fillColor: Colors.grey[200],
         ),
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return 'Please enter a $label';
+          }
+          return null;
+        },
       ),
     );
   }
@@ -93,8 +121,13 @@ class _AddIncomePageState extends State<AddIncomePage> {
   Widget _buildRepeatSwitch() {
     return SwitchListTile(
       title: const Text('Repeat transaction'),
-      value: false,
-      onChanged: (bool value) {},
+      activeColor: Theme.of(context).colorScheme.primary,
+      value: _recurring,
+      onChanged: (bool value) {
+        setState(() {
+          _recurring = value;
+        });
+      },
     );
   }
 }

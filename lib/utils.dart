@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:spendwise/home_page.dart';
 
 Future<void> addTransaction({
   required BuildContext context,
@@ -33,6 +34,8 @@ Future<void> addTransaction({
             backgroundColor: Color(0xFF00B2E7),
           ),
         );
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => const HomePage()));
       });
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -48,10 +51,25 @@ Future<void> addTransaction({
 Future<QuerySnapshot<Map<String, dynamic>>> getTransactions() async {
   final userAuth = FirebaseAuth.instance.currentUser;
   final db = FirebaseFirestore.instance;
-  final transactions = db.collection('transactions')
+  final recentTransactionsRef = db
+      .collection('transactions')
       .where('userId', isEqualTo: userAuth!.uid)
       .orderBy('date', descending: true)
-      .get();
+      .limit(5);
 
-  return transactions;
+  print(recentTransactionsRef);
+
+  return recentTransactionsRef.get();
+}
+
+Future getTopTransactions() async {
+  final userAuth = FirebaseAuth.instance.currentUser;
+  final db = FirebaseFirestore.instance;
+  final topTransactionsRef = db
+      .collection('transactions')
+      .where('userId', isEqualTo: userAuth!.uid)
+      .orderBy('amount', descending: true)
+      .limit(5);
+
+  return topTransactionsRef.get();
 }

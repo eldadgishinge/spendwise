@@ -2,6 +2,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:spendwise/add_income.dart';
 // import 'package:spendwise/chart.dart';
 import 'package:spendwise/stats.dart';
 // import 'add_income.dart';
@@ -149,15 +150,26 @@ class HomePage extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(width: 8),
-                    const Column(
+                    Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          'Income',
-                          style: TextStyle(
-                              fontSize: 14,
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const AddIncomePage(),
+                              ),
+                            );
+                          },
+                          child: const Text(
+                            'Income',
+                            style: TextStyle(
+                              fontSize: 16,
                               fontWeight: FontWeight.w500,
-                              color: Colors.white),
+                              color: Colors.white,
+                            ),
+                          ),
                         ),
                         Text(
                           '\$ 4800',
@@ -194,7 +206,7 @@ class HomePage extends StatelessWidget {
                         Text(
                           'Expenses',
                           style: TextStyle(
-                              fontSize: 14,
+                              fontSize: 16,
                               fontWeight: FontWeight.w500,
                               color: Colors.white),
                         ),
@@ -221,7 +233,6 @@ class HomePage extends StatelessWidget {
     return FutureBuilder<QuerySnapshot<Map<String, dynamic>>>(
       future: getTransactions(),
       builder: (context, snapshot) {
-        print(snapshot);
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
         }
@@ -260,9 +271,18 @@ class HomePage extends StatelessWidget {
               for (var transaction in transactions)
                 ListTile(
                   leading: _getIconForTransactionType(transaction['category']),
-                  title: Text(transaction['type']),
+                  title: Text(transaction['category'],
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      )),
                   subtitle: Text(transaction['description']),
-                  trailing: Text('- \$${transaction['amount']}'),
+                  trailing: Text('- \$${transaction['amount']}',
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.secondary,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                      )),
                 ),
             ],
           ),
@@ -281,7 +301,9 @@ class HomePage extends StatelessWidget {
         return const Icon(Icons.fastfood, color: Colors.red);
       default:
         return const Icon(
-            Icons.category); // Placeholder icon or handle other types
+          Icons.category,
+          color: Colors.amber,
+        ); // Placeholder icon or handle other types
     }
   }
 }
