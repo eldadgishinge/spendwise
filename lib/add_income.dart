@@ -24,56 +24,60 @@ class _AddIncomePageState extends State<AddIncomePage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            const Text('How much was made?', style: TextStyle(fontSize: 18)),
-            TextFormField(
-              controller: _amountController,
-              keyboardType: TextInputType.number,
-              decoration: const InputDecoration(
-                labelText: '\$0',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(12.0)),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: [
+              const Text('How much was made?', style: TextStyle(fontSize: 18)),
+              TextFormField(
+                controller: _amountController,
+                keyboardType: TextInputType.number,
+                decoration: const InputDecoration(
+                  labelText: '\$0',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(12.0)),
+                  ),
+                  filled: true,
+                  fillColor: Colors.white,
                 ),
-                filled: true,
-                fillColor: Colors.white,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter an amount';
+                  }
+                  return null;
+                },
+                style:
+                    const TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
               ),
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter an amount';
-                }
-                return null;
-              },
-              style: const TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 20),
-            _buildTextField(_categoryController, 'Category'),
-            _buildTextField(_descriptionController, 'Description'),
-            _buildAttachmentButton(),
-            _buildRepeatSwitch(),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                addTransaction(
-                    context: context,
-                    formKey: _formKey,
-                    type: 'income',
-                    amountController: _amountController,
-                    categoryController: _categoryController,
-                    descriptionController: _descriptionController,
-                    recurring: _recurring
-                );
-              },
-              style: ElevatedButton.styleFrom(
-                minimumSize: const Size(double.infinity, 50),
-                backgroundColor: Colors.blue,
+              const SizedBox(height: 20),
+              _buildTextField(_categoryController, 'Category'),
+              _buildTextField(_descriptionController, 'Description'),
+              _buildAttachmentButton(),
+              _buildRepeatSwitch(),
+              const SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () {
+                  print('Adding income');
+                  addTransaction(
+                      context: context,
+                      formKey: _formKey,
+                      type: 'income',
+                      amountController: _amountController,
+                      categoryController: _categoryController,
+                      descriptionController: _descriptionController,
+                      recurring: _recurring);
+                },
+                style: ElevatedButton.styleFrom(
+                  minimumSize: const Size(double.infinity, 50),
+                  backgroundColor: Colors.blue,
+                ),
+                child: const Text(
+                  'Continue',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
-              child: const Text(
-                'Continue',
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

@@ -171,7 +171,7 @@ class HomePage extends StatelessWidget {
                             ),
                           ),
                         ),
-                        Text(
+                        const Text(
                           '\$ 4800',
                           style: TextStyle(
                               fontSize: 18,
@@ -270,16 +270,20 @@ class HomePage extends StatelessWidget {
               ),
               for (var transaction in transactions)
                 ListTile(
-                  leading: _getIconForTransactionType(transaction['category']),
+                  leading:
+                      _getIconForTransactionType(transaction['type'], context),
                   title: Text(transaction['category'],
                       style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
                       )),
                   subtitle: Text(transaction['description']),
-                  trailing: Text('- \$${transaction['amount']}',
+                  trailing: Text('\$${transaction['amount']}',
                       style: TextStyle(
-                        color: Theme.of(context).colorScheme.secondary,
+                        // show color based on transaction type
+                        color: transaction['type'] == 'income'
+                            ? Theme.of(context).colorScheme.primary
+                            : Theme.of(context).colorScheme.secondary,
                         fontSize: 14,
                         fontWeight: FontWeight.w400,
                       )),
@@ -291,18 +295,34 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Icon _getIconForTransactionType(String type) {
+  CircleAvatar _getIconForTransactionType(String type, BuildContext context) {
     switch (type) {
-      case 'Shopping':
-        return const Icon(Icons.shopping_bag, color: Colors.orange);
-      case 'Subscription':
-        return const Icon(Icons.subscriptions, color: Colors.purple);
-      case 'Food':
-        return const Icon(Icons.fastfood, color: Colors.red);
+      case 'expense':
+        return CircleAvatar(
+          backgroundColor:
+              Theme.of(context).colorScheme.secondary.withOpacity(0.1),
+          child: Icon(
+            Icons.arrow_upward,
+            color: Theme.of(context).colorScheme.secondary,
+          ),
+        );
+      case 'income':
+        return CircleAvatar(
+          backgroundColor:
+              Theme.of(context).colorScheme.primary.withOpacity(0.1),
+          child: Icon(
+            Icons.arrow_downward,
+            color: Theme.of(context).colorScheme.primary,
+          ),
+        );
+
       default:
-        return const Icon(
-          Icons.category,
-          color: Colors.amber,
+        return const CircleAvatar(
+          // backgroundColor: Colors.grey.withOpacity(0.1),
+          child: Icon(
+            Icons.attach_money,
+            color: Colors.grey,
+          ),
         ); // Placeholder icon or handle other types
     }
   }

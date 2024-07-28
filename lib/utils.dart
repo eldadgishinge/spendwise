@@ -27,6 +27,10 @@ Future<void> addTransaction({
         "recurring": recurring,
         "date": Timestamp.now(),
         "userId": userAuth!.uid,
+      }).catchError((e) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Failed to add transaction: $e')),
+        );
       }).then((value) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
@@ -57,18 +61,17 @@ Future<QuerySnapshot<Map<String, dynamic>>> getTransactions() async {
       .orderBy('date', descending: true)
       .limit(5);
 
-  print(recentTransactionsRef);
-
   return recentTransactionsRef.get();
 }
 
-Future getTopTransactions() async {
+Future<QuerySnapshot<Map<String, dynamic>>> getTopSpending() async {
   final userAuth = FirebaseAuth.instance.currentUser;
   final db = FirebaseFirestore.instance;
   final topTransactionsRef = db
       .collection('transactions')
-      .where('userId', isEqualTo: userAuth!.uid)
       .orderBy('amount', descending: true)
+      .where('userId', isEqualTo: userAuth!.uid)
+      .where('type', isEqualTo: 'expense')
       .limit(5);
 
   return topTransactionsRef.get();

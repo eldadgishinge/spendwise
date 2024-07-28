@@ -1,5 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:spendwise/home_page.dart';
+import 'package:spendwise/utils.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 import 'profile_page.dart';
 import 'add_expense.dart';
@@ -34,8 +37,7 @@ class FinancialReportScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                      builder: (context) => const HomePage()),
+                  MaterialPageRoute(builder: (context) => const HomePage()),
                 );
               },
             ),
@@ -103,7 +105,7 @@ class FinancialReportScreen extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               const Text(
-                '01 June 2024 - 08 June 2024',
+                '21 July 2024 - 28 July 2024',
                 style: TextStyle(
                   fontSize: 16,
                   color: Colors.grey,
@@ -111,7 +113,7 @@ class FinancialReportScreen extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               const Text(
-                '\$200.00',
+                '\$254.99',
                 style: TextStyle(
                   fontSize: 32,
                   fontWeight: FontWeight.bold,
@@ -121,33 +123,52 @@ class FinancialReportScreen extends StatelessWidget {
               const SizedBox(height: 16),
               Expanded(
                 child: ListView(
-                  children: const [
-                    BarChart(),
-                    SizedBox(height: 16),
-                    Text(
+                  children: [
+                    const BarChart(),
+                    const SizedBox(height: 16),
+                    const Text(
                       'Top Spending',
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(height: 8),
-                    SpendingItem(
-                      icon: Icons.shopping_cart,
-                      title: 'Shopping',
-                      subtitle: 'Buy some grocery',
-                      amount: '-\$120',
-                      time: '10:00 AM',
-                      color: Colors.orange,
-                    ),
-                    SpendingItem(
-                      icon: Icons.subscriptions,
-                      title: 'Subscription',
-                      subtitle: 'Coursera Student',
-                      amount: '-\$80',
-                      time: '03:30 PM',
-                      color: Colors.orange,
-                    ),
+                    const SizedBox(height: 8),
+                    FutureBuilder<QuerySnapshot<Map<String, dynamic>>>(
+                        future: getTopSpending(),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return const Center(
+                                child: CircularProgressIndicator());
+                          }
+                          if (snapshot.hasError) {
+                            return Center(
+                                child: Text('Error: ${snapshot.error}',
+                                    style: const TextStyle(color: Colors.red)));
+                          }
+                          final documents = snapshot.data!;
+                          return ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: documents.size,
+                            itemBuilder: (context, index) {
+                              final doc = documents.docs[index];
+                              final data = doc.data();
+                              final timestamp = (data['date'] as Timestamp)
+                                  .toDate(); // Convert Timestamp to DateTime
+                              final timeAgo =
+                                  timeago.format(timestamp, locale: 'en_long');
+                              return SpendingItem(
+                                icon: Icons.arrow_upward_sharp,
+                                title: data['category'],
+                                subtitle: data['description'],
+                                amount: '-\$${data['amount']}',
+                                time: timeAgo,
+                                color: Theme.of(context).colorScheme.secondary,
+                              );
+                            },
+                          );
+                        })
                   ],
                 ),
               ),
