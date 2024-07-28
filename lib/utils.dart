@@ -76,3 +76,11 @@ Future<QuerySnapshot<Map<String, dynamic>>> getTopSpending() async {
 
   return topTransactionsRef.get();
 }
+
+// fetch financial quotes
+Future<QuerySnapshot<Map<String, dynamic>>> getFinancialQuotes() async {
+  final db = FirebaseFirestore.instance;
+  final quotesRef = db.collection('quotes');
+
+  return quotesRef.get();
+}
