@@ -24,37 +24,6 @@ class FinancialQuotesPage extends StatelessWidget {
             final List<Map<String, dynamic>> quotes =
                 snapshot.data!.docs.map((doc) => doc.data()).toList();
 
-            return ListView.builder(
-              padding: const EdgeInsets.all(16.0),
-              itemCount: quotes.length,
-              itemBuilder: (context, index) {
-                return Card(
-                  margin: const EdgeInsets.symmetric(vertical: 8.0),
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          quotes[index]['quote'],
-                          style: const TextStyle(
-                              fontSize: 18, fontStyle: FontStyle.italic),
-                        ),
-                        const SizedBox(height: 8),
-                        Text(
-                          '- ${quotes[index]['author']}',
-                          style: const TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    ),
-                  ),
-                );
-              },
-            );
-          }
-        },
-      ),
-    );
+          
   }
 }
