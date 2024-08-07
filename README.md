@@ -4,6 +4,10 @@
 
 SpendWise is a mobile application designed to help university students manage their finances effectively. By integrating features like expense tracking, budget setting, and financial advice, SpendWise empowers students to make informed financial decisions.
 
+## The APK file can be downloaded here
+
+Download our [APK file ](https://drive.google.com/file/d/1oaKOTa8DdzRw3ooAnaeZeazOMDyCXo7-/view?usp=sharing) 
+
 ## 📹 Demo Video
 
 Watch our [demo video on YouTube](https://youtu.be/ot52stKWcuY) 📺
